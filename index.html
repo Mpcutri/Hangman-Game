@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1 id="title">Hangman game</h1>
+
+	<p>Press any key to get started!</p>
+		<br>
+
+	<p><span id="random-word"></span></p>
+		<br>
+
+	<p>Number of Guesses Remaining</p>
+		<br>
+
+	<p id="guesses-number"></p>
+		<br>
+	<p>Letters already guessed</p>
+		<br>
+	<p><span id="letters-guessed"></span></p>
+
+	<script type="text/javascript">
+		// Creating the Variables, and an array of the words to be choses variables for words to be guesses.
+
+		var wordsToGuess = [
+			"spaghetti",
+			"meatballs",
+			"parmesean",
+			"oregano",
+		];
+
+		var guessesSoFar = [];
+		var guessesLeft = 12;
+
+		var letterMatched = false // figure this one out
+
+		// chooses random word each time, also makes variable for each single word.
+
+		var randomWord = wordsToGuess[Math.floor(Math.random() * wordsToGuess.length)];
+		console.log(randomWord);
+
+		//populate the page with randomWord
+
+		var emptyLetters = [];
+
+		for (var i = 0; i < randomWord.length; i++) {
+			emptyLetters.push("_");
+		}
+		console.log(emptyLetters);
+
+		document.getElementById("random-word").innerHTML = emptyLetters.join(" ");
+
+		// make emptyLetters fill with UserGuess
+
+		document.onkeyup = function(event) {
+
+			var userGuess = event.key.toLowerCase();
+			var stringLetter = randomWord.includes(userGuess);
+			console.log("user guess: " + userGuess);
+
+			for (i = 0; i < randomWord.length; i++) {
+				if (userGuess === randomWord.charAt(i)) {
+				console.log("Index: " + i + randomWord.charAt(i));
+				emptyLetters[i] = userGuess.toUpperCase();
+				}
+
+			}
+				if (stringLetter === false) {
+					guessesSoFar.push(userGuess);
+					console.log(guessesSoFar);
+				}
+			// console.log(emptyLetters);
+			document.getElementById("random-word").innerHTML = emptyLetters.join(" ");
+			document.getElementById("letters-guessed").innerHTML = (guessesSoFar);
+
+			
+		} // Document.onkeyup ending bracket
+
+	
+
+
+
+
+		// after win reset function for resetting letters and replacing with a new word and empty spaces.
+
+
+	</script>
+
+</body>
+</html>
